@@ -1,23 +1,26 @@
 let buzz number = if number % 5 = 0 then "Buzz" else ""
 let fizz number = if number % 3 = 0 then "Fizz" else ""
 
-let functions = [ fizz; buzz ]
+let rec appyFizzBuzz (number, func, acc) =
+    match func with
+    | [] -> acc
+    | f :: func -> appyFizzBuzz (number, func, acc + f (number))
 
-let numbers = [ 1 .. 100 ]
+let finalFizzBuzzString (partial, result, number) =
+    result
+    + match partial with
+      | "" -> number.ToString()
+      | _ -> partial
 
-let fizzBuzzFunction (num, func) =
+let fizzBuzz (functionsList) =
     let mutable result = ""
 
-    for n in num do
-        let mutable partial = ""
-        for f in func do
-            partial <- partial + f (n)
-
-        if partial = "" then
-            result <- result + n.ToString()
-        else
-            result <- result + partial
+    for n in 1 .. 100 do
+        //TODO: capire come si usa l'operatore |> e >>>, sicuramente migliorabiile
+        let partial = appyFizzBuzz (n, functionsList, "")
+        result <- finalFizzBuzzString (partial, result, n)
 
     printfn ($"{result}")
 
-fizzBuzzFunction (numbers, functions)
+let functions = [ fizz; buzz ]
+fizzBuzz (functions)
