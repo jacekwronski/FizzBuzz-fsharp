@@ -7,9 +7,7 @@ let getFizzBuzz n =
     | n when n % 3 = 0 -> "Fizz"
     | _ -> n.ToString()
 
-let fizzBuzzFunction num =
-    let fizzBuzzArr = [for n in num do yield getFizzBuzz n]
-        
-    printfn "%s" <| String.concat "," fizzBuzzArr
+let fizzBuzzGenerator num =    
+    String.concat "," [for n in num do yield getFizzBuzz n]
 
-fizzBuzzFunction numbers
+printfn "%s" <| fizzBuzzGenerator numbers
