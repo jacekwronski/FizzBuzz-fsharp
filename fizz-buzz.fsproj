@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="UnitTest1.fs"/>
     <Compile Include="fizz-buzz.fs"/>
+    <Compile Include="FizzBuzzTest.fs"/>
     <Compile Include="Program.fs"/>
   </ItemGroup>
 
