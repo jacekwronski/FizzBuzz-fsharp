@@ -1,23 +1,15 @@
-let buzz number = if number % 5 = 0 then "Buzz" else ""
-let fizz number = if number % 3 = 0 then "Fizz" else ""
-
-let functions = [ fizz; buzz ]
-
 let numbers = [ 1 .. 100 ]
 
-let fizzBuzzFunction (num, func) =
-    let mutable result = ""
+let getFizzBuzz n =
+    match n with
+    | n when n % 3 = 0 && n % 5 = 0 -> "FizzBuzz"
+    | n when n % 5 = 0 -> "Buzz"
+    | n when n % 3 = 0 -> "Fizz"
+    | _ -> n.ToString()
 
-    for n in num do
-        let mutable partial = ""
-        for f in func do
-            partial <- partial + f (n)
+let fizzBuzzFunction num =
+    let fizzBuzzArr = [for n in num do yield getFizzBuzz n]
+        
+    printfn "%s" <| String.concat "," fizzBuzzArr
 
-        if partial = "" then
-            result <- result + n.ToString()
-        else
-            result <- result + partial
-
-    printfn ($"{result}")
-
-fizzBuzzFunction (numbers, functions)
+fizzBuzzFunction numbers
